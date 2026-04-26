@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <h1>MiInventarioExpress</h1>
+
+    <nav>
+      <a href="/">Productos</a>
+      <a href="/chat">Chat</a>
+
+      {{#if user}}
+        <span>Usuario: {{user.nombre}}</span>
+        <a href="/logout">Cerrar sesión</a>
+      {{else}}
+        <a href="/login">Iniciar sesión</a>
+        <a href="/register">Registrarse</a>
+      {{/if}}
+    </nav>
+  </header>
+
+  <main class="container">
+    {{{body}}}
+  </main>
+
+  <footer class="footer">
+    <p>Aplicaciones Web - Unidad 2</p>
+  </footer>
+</body>
+</html>

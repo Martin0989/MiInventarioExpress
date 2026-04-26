@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+}
+
+.header {
+  background: #1f2937;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.header nav {
+  margin-top: 10px;
+}
+
+.header a,
+.header span {
+  color: white;
+  margin: 0 8px;
+  text-decoration: none;
+}
+
+.header a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+  display: inline-block;
+  background: #2563eb;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: #555;
+}
