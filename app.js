@@ -48,12 +48,9 @@ app.use((req, res, next) => {
 });
 
 // Ruta principal temporal
-app.get('/', (req, res) => {
-  res.render('products/index', {
-    title: 'MiInventarioExpress',
-    products: []
-  });
-});
+const productRoutes = require('./routes/productRoutes');
+
+app.use('/', productRoutes);
 
 // Configuración inicial de Socket.io
 io.on('connection', (socket) => {

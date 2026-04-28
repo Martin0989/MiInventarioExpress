@@ -1,0 +1,44 @@
+<section class="card">
+  <h2>Crear producto</h2>
+
+  {{#if error}}
+    <div class="alert alert-error">
+      {{error}}
+    </div>
+  {{/if}}
+
+  <form action="/products/create" method="POST" class="form">
+    <label for="nombre">Nombre</label>
+    <input 
+      type="text" 
+      id="nombre" 
+      name="nombre" 
+      value="{{values.nombre}}" 
+      required
+    >
+
+    <label for="precio">Precio</label>
+    <input 
+      type="number" 
+      id="precio" 
+      name="precio" 
+      step="0.01" 
+      min="0" 
+      value="{{values.precio}}" 
+      required
+    >
+
+    <label for="descripcion">Descripción</label>
+    <textarea 
+      id="descripcion" 
+      name="descripcion" 
+      rows="4" 
+      required
+    >{{values.descripcion}}</textarea>
+
+    <div class="form-actions">
+      <button class="btn" type="submit">Guardar producto</button>
+      <a class="btn btn-secondary" href="/">Cancelar</a>
+    </div>
+  </form>
+</section>

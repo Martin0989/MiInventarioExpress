@@ -1,7 +1,60 @@
 <section class="card">
-  <h2>Gestión de productos</h2>
-  <p>Bienvenido a MiInventarioExpress.</p>
-  <p>En esta aplicación se implementará el CRUD de productos, autenticación, carga de imágenes y chat en tiempo real.</p>
+  <div class="section-header">
+    <div>
+      <h2>Gestión de productos</h2>
+      <p>Listado de productos registrados en MiInventarioExpress.</p>
+    </div>
 
-  <a class="btn" href="#">Crear producto</a>
+    <a class="btn" href="/products/create">Crear producto</a>
+  </div>
+
+  {{#if error}}
+    <div class="alert alert-error">
+      {{error}}
+    </div>
+  {{/if}}
+
+  {{#if products.length}}
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Descripción</th>
+            <th>Imagen</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{#each products}}
+            <tr>
+              <td>{{this.nombre}}</td>
+              <td>${{this.precio}}</td>
+              <td>{{this.descripcion}}</td>
+              <td>
+                {{#if this.imagen}}
+                  <img class="product-img" src="/uploads/{{this.imagen}}" alt="{{this.nombre}}">
+                {{else}}
+                  Sin imagen
+                {{/if}}
+              </td>
+              <td class="actions">
+                <a class="btn btn-small" href="/products/edit/{{this._id}}">Editar</a>
+
+                <form action="/products/delete/{{this._id}}" method="POST" class="inline-form">
+                  <button class="btn btn-danger btn-small" type="submit">
+                    Eliminar
+                  </button>
+                </form>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{else}}
+    <p>No hay productos registrados todavía.</p>
+  {{/if}}
 </section>
