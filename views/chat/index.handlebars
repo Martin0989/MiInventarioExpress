@@ -1,0 +1,21 @@
+<section class="card chat-card">
+  <h2>Chat en tiempo real</h2>
+  <p>Chat disponible para usuarios autenticados.</p>
+
+  <div id="messages" class="messages"></div>
+
+  <form id="chatForm" class="chat-form">
+    <input type="hidden" id="usuario" value="{{user.nombre}}">
+    <input 
+      type="text" 
+      id="mensaje" 
+      placeholder="Escribe un mensaje..." 
+      autocomplete="off" 
+      required
+    >
+    <button class="btn" type="submit">Enviar</button>
+  </form>
+</section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chat.js"></script>

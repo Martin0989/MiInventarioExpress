@@ -7,7 +7,15 @@
     </div>
   {{/if}}
 
-  <form action="/products/create" method="POST" class="form">
+  {{#if errors}}
+    <div class="alert alert-error">
+      {{#each errors}}
+        <p>{{this.msg}}</p>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <form action="/products/create" method="POST" enctype="multipart/form-data" class="form">
     <label for="nombre">Nombre</label>
     <input 
       type="text" 
@@ -35,6 +43,14 @@
       rows="4" 
       required
     >{{values.descripcion}}</textarea>
+
+    <label for="imagen">Imagen del producto</label>
+    <input 
+      type="file" 
+      id="imagen" 
+      name="imagen" 
+      accept="image/png, image/jpeg, image/jpg, image/webp"
+    >
 
     <div class="form-actions">
       <button class="btn" type="submit">Guardar producto</button>

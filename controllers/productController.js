@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const Product = require('../models/Product');
 
 const productController = {
@@ -25,20 +26,31 @@ const productController = {
   },
 
   crearProducto: async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.render('products/create', {
+        title: 'Crear producto',
+        errors: errors.array(),
+        values: req.body
+      });
+    }
+
     try {
       const { nombre, precio, descripcion } = req.body;
 
       await Product.create({
         nombre,
         precio,
-        descripcion
+        descripcion,
+        imagen: req.file ? req.file.filename : ''
       });
 
       res.redirect('/');
     } catch (error) {
       res.render('products/create', {
         title: 'Crear producto',
-        error: 'No se pudo crear el producto. Revisa los datos ingresados.',
+        error: 'No se pudo crear el producto.',
         values: req.body
       });
     }
@@ -62,14 +74,35 @@ const productController = {
   },
 
   actualizarProducto: async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      const product = {
+        _id: req.params.id,
+        ...req.body
+      };
+
+      return res.render('products/edit', {
+        title: 'Editar producto',
+        errors: errors.array(),
+        product
+      });
+    }
+
     try {
       const { nombre, precio, descripcion } = req.body;
 
-      await Product.findByIdAndUpdate(req.params.id, {
+      const data = {
         nombre,
         precio,
         descripcion
-      });
+      };
+
+      if (req.file) {
+        data.imagen = req.file.filename;
+      }
+
+      await Product.findByIdAndUpdate(req.params.id, data);
 
       res.redirect('/');
     } catch (error) {

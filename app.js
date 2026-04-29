@@ -49,12 +49,24 @@ app.use((req, res, next) => {
 
 // Ruta principal temporal
 const productRoutes = require('./routes/productRoutes');
+const authRoutes = require('./routes/authRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 
+app.use('/', authRoutes);
 app.use('/', productRoutes);
+app.use('/', chatRoutes);
 
 // Configuración inicial de Socket.io
 io.on('connection', (socket) => {
   console.log('Usuario conectado al chat');
+
+  socket.on('chatMessage', (data) => {
+    io.emit('chatMessage', {
+      usuario: data.usuario,
+      mensaje: data.mensaje,
+      fecha: new Date().toLocaleTimeString()
+    });
+  });
 
   socket.on('disconnect', () => {
     console.log('Usuario desconectado del chat');

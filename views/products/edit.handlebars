@@ -1,7 +1,15 @@
 <section class="card">
   <h2>Editar producto</h2>
 
-  <form action="/products/edit/{{product._id}}" method="POST" class="form">
+  {{#if errors}}
+    <div class="alert alert-error">
+      {{#each errors}}
+        <p>{{this.msg}}</p>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <form action="/products/edit/{{product._id}}" method="POST" enctype="multipart/form-data" class="form">
     <label for="nombre">Nombre</label>
     <input 
       type="text" 
@@ -29,6 +37,19 @@
       rows="4" 
       required
     >{{product.descripcion}}</textarea>
+
+    {{#if product.imagen}}
+      <p>Imagen actual:</p>
+      <img class="product-img-large" src="/uploads/{{product.imagen}}" alt="{{product.nombre}}">
+    {{/if}}
+
+    <label for="imagen">Cambiar imagen</label>
+    <input 
+      type="file" 
+      id="imagen" 
+      name="imagen" 
+      accept="image/png, image/jpeg, image/jpg, image/webp"
+    >
 
     <div class="form-actions">
       <button class="btn" type="submit">Actualizar producto</button>
